@@ -3,12 +3,14 @@ A model to read multiple Analog gauge reading using computer Vision
 
 Premise:
 Analogue pointer-type dials are widely applied in industry like Oil&Gas sector and many operation industry. Visual inspection is necessary to obtain readings from analog gauges. This means a human operator must travel to the gauge’s location, read its current value, and log that value to enable the data to be used elsewhere. This is a time consuming and expensive process and it is prone to human errors. An alternative to the manual readings is to record a video of the gauge and analyze the pressure variations using computer vision techniques. I had an opportunity to take on one such project.
+
 Approach:
 Placing a camera in close contact to a “Analogue Gauge” and using the feed to analyze frames at desired frequency. I concentrated on building the model on single frame and can be used with “VideoCapture(i)” to access the camera feed, but that’s not the goal for now. 
 Lets dive into it.
 
 Analogy behind:
 Before going to the details of process, lets take a look at “Hough Space” concept which will be very helpful in understanding “Shape detection” like line, ellipse or circle detection.
+
 HOUGH SPACE:
 Representation of Lines in the Hough Space Lines can be represented uniquely by two parameters. Often the form in Equation 1 is used with parameters a and b.
 Finding lines in an image: Hough Space
