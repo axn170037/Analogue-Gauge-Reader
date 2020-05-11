@@ -1,4 +1,4 @@
-# analogue-gauge-reader
+# Analogue-gauge-reader
 A model to read multiple Analog gauge reading using computer Vision
 
 Premise:
@@ -43,8 +43,6 @@ There are some issues with usual (m,b) parameter space so we also have polar rep
 Getting back to the topic, I approached the problem in five steps:
 1. Circles detection (dial): OpenCV has a function for detecting circles, called HoughCircles. In the circle case, we need three parameters to define a circle:
 
-
-Analogue gauge: Dial and angle imposed.
 Analogue gauge: Dial and angle imposed.
 Arguments:
 gray: Input image (grayscale)
