@@ -1,17 +1,17 @@
 # Analogue-gauge-reader
 A model to read multiple Analog gauge reading using computer Vision
 
-Premise:
+# Premise:
 Analogue pointer-type dials are widely applied in industry like Oil&Gas sector and many operation industry. Visual inspection is necessary to obtain readings from analog gauges. This means a human operator must travel to the gauge’s location, read its current value, and log that value to enable the data to be used elsewhere. This is a time consuming and expensive process and it is prone to human errors. An alternative to the manual readings is to record a video of the gauge and analyze the pressure variations using computer vision techniques. I had an opportunity to take on one such project.
 
-Approach:
+# Approach:
 Placing a camera in close contact to a “Analogue Gauge” and using the feed to analyze frames at desired frequency. I concentrated on building the model on single frame and can be used with “VideoCapture(i)” to access the camera feed, but that’s not the goal for now. 
 Lets dive into it.
 
-Analogy behind:
+# Analogy behind:
 Before going to the details of process, lets take a look at “Hough Space” concept which will be very helpful in understanding “Shape detection” like line, ellipse or circle detection.
 
-HOUGH SPACE:
+# HOUGH SPACE:
 Representation of Lines in the Hough Space Lines can be represented uniquely by two parameters. Often the form in Equation 1 is used with parameters a and b.
 Finding lines in an image: Hough Space
 y = m0· x + b0 (1)
@@ -45,7 +45,8 @@ All points (xi , yi ) on the same line will pass the same parameter space point 
 Quantize the parameter space and tally # of times each points fall into the same accumulator cell. The cell count = # of points in the same line.
 There are some issues with usual (m,b) parameter space so we also have polar representation for lines, which I will go through in details in the next article for “Panel gauge reader”.
 Getting back to the topic, I approached the problem in five steps:
-1. Circles detection (dial): OpenCV has a function for detecting circles, called HoughCircles. In the circle case, we need three parameters to define a circle:
+# 1. Circles detection (dial): 
+OpenCV has a function for detecting circles, called HoughCircles. In the circle case, we need three parameters to define a circle:
 
 Analogue gauge: Dial and angle imposed.
 Arguments:
@@ -57,7 +58,9 @@ param_1 = 100: Upper threshold for the internal Canny edge detector
 param_2 = 50: Threshold for center detection.
 min_radius : Minimum radio to be detected. If unknown, put zero as default.
 max_radius : Maximum radius to be detected. If unknown, put zero as default
-2. Line detection (needle): Probabilistic Hough Transform is an optimization of Hough transform we saw.
+
+# 2. Line detection (needle): 
+Probabilistic Hough Transform is an optimization of Hough transform we saw.
 
 It doesn’t take all the points into consideration, instead take only a random subset of points and that is sufficient for line detection. we have to reiterate while decreasing/increasing the threshold.
 Arguments:image — 8-bit, single-channel binary source image. The image may be modified by the function.
@@ -78,7 +81,7 @@ final_angle= ArcTan(abs(y_len/x_len))
 Note: Be careful to put a check on constrain like which quadrant it might lie and make changes accordingly like:
 5. Convert angle to readings: This would be the simplest of all steps like we used to do “Unitary” method when we were kid like if 100 unit cost 1000 bucks then how much will 35 units cost.
 
-“VOILA!!”
+# “VOILA!!”
 We have got a pretty much accurate reading of what we were looking for.
 “After all the EYE sees it all!!!!!”
 
